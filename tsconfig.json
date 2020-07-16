@@ -24,11 +24,6 @@
       "./node_modules/@types",
       "./src/@types"
     ],
-    "paths": {
-      "@components/*": ["./src/components/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@assets/*": ["./src/assets/*"]
-    },
     "removeComments": true,
     "rootDir": "./src",
     "outDir": "./build",
