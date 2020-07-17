@@ -18,7 +18,7 @@ export const Info = styled.div`
   display: flex;
   flex-direction: column;
 
-  max-height: calc(100vh - 46px - 68px);
+  max-height: calc(100vh - 150px - 46px);
   overflow-y: scroll;
 
   color: var(--white);
