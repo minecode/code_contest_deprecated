@@ -70,7 +70,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           const result = (reader.result as string).split(',')[1]
 
           const bodyRequest: BodyRequest = {
-            message: `${challengeName?.split(' ').join('_')}/user1`,
+            message: `${challengeName}/user1`,
             committer: {
               name: 'minecodebot',
               email: 'minecode.geral@gmail.com'
