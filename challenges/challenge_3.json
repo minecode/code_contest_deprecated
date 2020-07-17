@@ -2,30 +2,6 @@
 {
   "title": "titleExample2",
   "difficulty": "difficultyExample2",
-  "description": '
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Cras a tortor ut enim ultricies ultrices.
-
-    Nulla ac nunc aliquet, euismod lorem eget, molestie turpis.
-    Nunc vel velit nec erat mattis sodales ut et risus.
-
-    Proin aliquam ante at felis mollis bibendum.
-    Aliquam tempus neque et erat pharetra lacinia.
-    Mauris rutrum massa at fringilla ultricies.
-    Mauris non nibh sed ex commodo ornare.
-    Mauris pretium neque in ex rhoncus, non imperdiet mi lobortis.
-
-    Nullam id neque eu nulla lacinia tincidunt imperdiet feugiat quam.
-    Pellentesque dapibus risus aliquam orci luctus, sed imperdiet ante aliquet.
-    Ut consequat nisi eget aliquam sollicitudin.
-    Aliquam in risus id ex egestas semper.
-    Duis varius libero ac augue fermentum congue vitae nec ex.
-    Fusce eget orci vel diam hendrerit aliquet.
-
-    Nullam finibus nibh in molestie pretium.
-    Sed at mi sit amet libero congue molestie ac vitae orci.
-    Nunc bibendum dolor in fermentum pharetra.
-    In ut arcu at lacus gravida consectetur.
-    Pellentesque eu ligula lobortis, sagittis neque eleifend, dapibus ex.
+  "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nCras a tortor ut enim ultricies ultrices.\nNulla ac nunc aliquet, euismod lorem eget, molestie turpis.\nNunc vel velit nec erat mattis sodales ut et risus.\nProin aliquam ante at felis mollis bibendum.\nAliquam tempus neque et erat pharetra lacinia.\nMauris rutrum massa at fringilla ultricies.\nMauris non nibh sed ex commodo ornare.\nMauris pretium neque in ex rhoncus, non imperdiet mi lobortis.\n\nNullam id neque eu nulla lacinia tincidunt imperdiet feugiat quam.\nPellentesque dapibus risus aliquam orci luctus, sed imperdiet ante aliquet.\nUt consequat nisi eget aliquam sollicitudin.\nAliquam in risus id ex egestas semper.\nDuis varius libero ac augue fermentum congue vitae nec ex.\nFusce eget orci vel diam hendrerit aliquet.\n\nNullam finibus nibh in molestie pretium.\nSed at mi sit amet libero congue molestie ac vitae orci.\nNunc bibendum dolor in fermentum pharetra.\nIn ut arcu at lacus gravida consectetur.\nPellentesque eu ligula lobortis, sagittis neque eleifend, dapibus ex.\n
 '
 }
