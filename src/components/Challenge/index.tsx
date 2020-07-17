@@ -22,8 +22,8 @@ const Challenge: React.FC = () => {
     challenges?.forEach(challenge => {
       if (challenge.isEqualNode(document.getElementById(id.toString()))) {
         data?.forEach(selectedChallenge => {
-          if (selectedChallenge.name.split('.')[0] === challenge.firstChild?.textContent) {
-            setChallengeName(selectedChallenge.name.split('.')[0])
+          if (selectedChallenge.name === challenge.firstChild?.textContent) {
+            setChallengeName(selectedChallenge.name)
             setChallengeSelected(id.toString())
           }
         })
@@ -39,9 +39,11 @@ const Challenge: React.FC = () => {
             <span>Challenges</span>
           </Category>
           <div id='listOfChallenges'>
-            {data?.map((challenge, i) => (
+            {data?.filter((challenge) => {
+              return challenge.name !== 'requirements.txt'
+            }).map((challenge, i) => (
               <div key={i} id={i.toString()} onClick={() => handleSelectChange(i)}>
-                <ChallengeButton challengeName={challenge.name.split('.')[0]} selected={challengeSelected === i.toString()}/>
+                <ChallengeButton challengeName={challenge.name} selected={challengeSelected === i.toString()}/>
               </ div>
             ))}
           </div>
