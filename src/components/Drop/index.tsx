@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Container, DropFiles, SubmitButton, DropFilesZone } from './styles'
 import Dropzone from 'react-dropzone'
-import apiCodeContestResponses from '../../services/apiCodeContestResponses'
+import apiCodeContest from '../../services/apiCodeContest'
 
 export interface Props {
   challengeName?: string;
@@ -79,7 +79,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           }
 
           try {
-            const fileAlreadyExist = await apiCodeContestResponses.get(`/contents/${challengeName}/user1/resolution.py`, config)
+            const fileAlreadyExist = await apiCodeContest.get(`/contents/${challengeName}/user1/resolution.py`, config)
             bodyRequest.sha = `${fileAlreadyExist.data.sha}`
           } catch (error) {
             console.log(error)
@@ -94,16 +94,16 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
   const submitFile = async (bodyRequest: BodyRequest) => {
     setSolution('')
     setInProgress(true)
-    const push: Push = await apiCodeContestResponses.put(`/contents/${challengeName}/user1/resolution.py`, bodyRequest, config)
+    const push: Push = await apiCodeContest.put(`/contents/${challengeName}/user1/resolution.py`, bodyRequest, config)
     // eslint-disable-next-line no-var
     console.log(push.data.commit.sha)
-    let run: Run = await apiCodeContestResponses.get(`/commits/${push.data.commit.sha}/check-runs`, config)
+    let run: Run = await apiCodeContest.get(`/commits/${push.data.commit.sha}/check-runs`, config)
     while (run.data.total_count === 0) {
-      run = await apiCodeContestResponses.get(`/commits/${push.data.commit.sha}/check-runs`, config)
+      run = await apiCodeContest.get(`/commits/${push.data.commit.sha}/check-runs`, config)
     }
     let runState = run.data.check_runs[0].status
     while (runState !== 'completed') {
-      run = await apiCodeContestResponses.get(`/commits/${push.data.commit.sha}/check-runs`, config)
+      run = await apiCodeContest.get(`/commits/${push.data.commit.sha}/check-runs`, config)
       runState = run.data.check_runs[0].status
     }
     setSolution(run.data.check_runs[0].conclusion)
