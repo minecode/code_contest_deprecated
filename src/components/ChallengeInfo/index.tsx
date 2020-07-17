@@ -24,7 +24,7 @@ interface Challenge {
 
 const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
   const { data } = useFetch<Challenge>(
-    `/contents/challenges/${challengeName}.json`
+    `/contents/challenges/${challengeName}/index.json`
   )
 
   return (
