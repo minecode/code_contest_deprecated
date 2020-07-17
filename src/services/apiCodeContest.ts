@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const api = axios.create({
+const apiCodeContest = axios.create({
   baseURL: 'https://api.github.com/repos/minecode/code_contest'
 })
 
-export default api
+export default apiCodeContest

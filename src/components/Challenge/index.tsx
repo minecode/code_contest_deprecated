@@ -13,7 +13,6 @@ interface Challenge {
 }
 
 const Challenge: React.FC = () => {
-  const [challengeShortDescription, setChallengeShortDescription] = useState('')
   const [challengeName, setChallengeName] = useState('')
   const [challengeSelected, setChallengeSelected] = useState('')
 
@@ -25,7 +24,6 @@ const Challenge: React.FC = () => {
         data?.forEach(selectedChallenge => {
           if (selectedChallenge.name.split('.')[0] === challenge.firstChild?.textContent) {
             setChallengeName(selectedChallenge.name.split('.')[0])
-            setChallengeShortDescription(selectedChallenge.name)
             setChallengeSelected(id.toString())
           }
         })
@@ -48,7 +46,7 @@ const Challenge: React.FC = () => {
             ))}
           </div>
         </ContainerList>
-        {challengeName && challengeShortDescription ? <><ChallengeInfo challengeName={challengeName} challengeShortDescription={challengeShortDescription}/><Drop challengeName={challengeName} /></> : <></>}
+        {challengeName ? <><ChallengeInfo challengeName={challengeName}/><Drop challengeName={challengeName} /></> : <></>}
       </Grid>
     </Container>
   )

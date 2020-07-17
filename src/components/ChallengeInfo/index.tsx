@@ -15,7 +15,6 @@ import base64 from 'base-64'
 
 export interface Props {
   challengeName?: string;
-  challengeShortDescription?: string;
 }
 
 interface Challenge {

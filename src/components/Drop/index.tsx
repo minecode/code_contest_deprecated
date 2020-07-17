@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Container, DropFiles, SubmitButton, DropFilesZone } from './styles'
 import Dropzone from 'react-dropzone'
-import api from '../../services/api'
+import apiCodeContestResponses from '../../services/apiCodeContestResponses'
 
 export interface Props {
   challengeName?: string;
@@ -16,18 +16,52 @@ interface Challenge {
   content: string;
 }
 
+interface Push {
+  data: {
+    commit: {
+      sha: string
+    }
+  }
+  id: number
+}
+
+interface Run {
+  data: {
+    // eslint-disable-next-line camelcase
+    check_runs: [{
+      status: string,
+      conclusion: string
+    }],
+    total_count: number
+  }
+}
+
 const Drop: React.FC<Props> = ({ challengeName }) => {
   const [fileName, setFileName] = useState('')
+  const [solution, setSolution] = useState('')
+  const [inProgress, setInProgress] = useState(false)
+  const [sendedFile, setSendedFile] = useState(false)
   const [currentChallengeName, setCurrentChallengeName] = useState<string>('challenge')
   const [bodyRequest, setBodyRequest] = useState <BodyRequest | null >(null)
+
+  const config = {
+    headers: {
+      Authorization: `token ${process.env.REACT_APP_TOKEN}`,
+      Accept: 'application/vnd.github.antiope-preview+json'
+    }
+  }
 
   if (challengeName && challengeName !== currentChallengeName) {
     setCurrentChallengeName(challengeName)
     setFileName('')
     setBodyRequest(null)
+    setSendedFile(false)
+    setSolution('')
+    setInProgress(false)
   }
 
   const handleDrop = (acceptedFile: any) => {
+    setSendedFile(false)
     setFileName(acceptedFile.map((file: any) => {
       const reader = new FileReader()
       reader.readAsDataURL(file)
@@ -36,7 +70,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           const result = (reader.result as string).split(',')[1]
 
           const bodyRequest: BodyRequest = {
-            message: `Upload file ${challengeName}/${file.name}`,
+            message: `${challengeName}/user1`,
             committer: {
               name: 'minecodebot',
               email: 'minecode.geral@gmail.com'
@@ -45,7 +79,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           }
 
           try {
-            const fileAlreadyExist = await api.get(`/contents/files/${challengeName}/${file.name}`)
+            const fileAlreadyExist = await apiCodeContestResponses.get(`/contents/${challengeName}/user1/resolution.py`, config)
             bodyRequest.sha = `${fileAlreadyExist.data.sha}`
           } catch (error) {
             console.log(error)
@@ -57,15 +91,24 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
     }))
   }
 
-  const submitFile = async (bodyRequest: BodyRequest, fileName: string) => {
-    console.log(bodyRequest)
-    console.log(fileName)
-    const config = {
-      headers: { Authorization: `token ${process.env.REACT_APP_TOKEN}` }
+  const submitFile = async (bodyRequest: BodyRequest) => {
+    setSolution('')
+    setInProgress(true)
+    const push: Push = await apiCodeContestResponses.put(`/contents/${challengeName}/user1/resolution.py`, bodyRequest, config)
+    // eslint-disable-next-line no-var
+    console.log(push.data.commit.sha)
+    let run: Run = await apiCodeContestResponses.get(`/commits/${push.data.commit.sha}/check-runs`, config)
+    while (run.data.total_count === 0) {
+      run = await apiCodeContestResponses.get(`/commits/${push.data.commit.sha}/check-runs`, config)
     }
-    console.log(config)
-
-    await api.put(`/contents/files/${challengeName}/${fileName}`, bodyRequest, config)
+    let runState = run.data.check_runs[0].status
+    while (runState !== 'completed') {
+      run = await apiCodeContestResponses.get(`/commits/${push.data.commit.sha}/check-runs`, config)
+      runState = run.data.check_runs[0].status
+    }
+    setSolution(run.data.check_runs[0].conclusion)
+    setInProgress(false)
+    setSendedFile(true)
   }
 
   return (
@@ -89,7 +132,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
                     {fileName ? <>{fileName}</> : isDragReject ? <> Invalid file </> : <>Drag & drop images, or click to select files</>}
                   </p>
                 </DropFilesZone>
-                {bodyRequest ? <SubmitButton onClick={() => submitFile(bodyRequest, fileName)}>Submit</SubmitButton> : <></>}
+                {inProgress ? <p>Testing your solution. Wait a moment, please!</p> : bodyRequest && !sendedFile ? <SubmitButton onClick={() => submitFile(bodyRequest)}>Submit</SubmitButton> : sendedFile && solution ? <p>{solution}</p> : <></>}
               </DropFiles>
             )
           }}
