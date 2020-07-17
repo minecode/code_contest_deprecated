@@ -8,12 +8,10 @@ import {
   Title,
   Separator,
   Description,
-  Info,
-  InputWrapper
+  Info
 } from './styles'
 
 import base64 from 'base-64'
-import Drop from '../Drop'
 
 export interface Props {
   challengeName?: string;
@@ -51,9 +49,6 @@ const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
             ? JSON.parse(base64.decode(data.content)).description
             : ''}
         </Info>
-        <InputWrapper>
-          <Drop />
-        </InputWrapper>
       </ContainerDescription>
     </>
   )

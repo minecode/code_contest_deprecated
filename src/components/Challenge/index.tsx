@@ -6,6 +6,7 @@ import ChallengeInfo from '../ChallengeInfo'
 import ChallengeButton from '../ChallengeButton'
 
 import { useFetch } from 'src/hooks/useFetch'
+import Drop from '../Drop'
 
 interface Challenge {
   name: string
@@ -47,7 +48,7 @@ const Challenge: React.FC = () => {
             ))}
           </div>
         </ContainerList>
-        {challengeName && challengeShortDescription ? <ChallengeInfo challengeName={challengeName} challengeShortDescription={challengeShortDescription}/> : <></>}
+        {challengeName && challengeShortDescription ? <><ChallengeInfo challengeName={challengeName} challengeShortDescription={challengeShortDescription}/><Drop challengeName={challengeName} /></> : <></>}
       </Grid>
     </Container>
   )

@@ -14,12 +14,12 @@ export const Grid = styled.div`
   display: grid;
 
   grid-template-columns: 311px auto;
-  grid-template-rows: 46px auto;
+  grid-template-rows: 46px auto 150px;
 
   grid-template-areas:
     'CL CI'
     'CL CD'
-    'CL CD';
+    'CL DF';
 
   height: 100vh;
 `
