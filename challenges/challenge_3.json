@@ -2,7 +2,7 @@
 {
   "title": "titleExample2",
   "difficulty": "difficultyExample2",
-  "description": "
+  "description": '
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Cras a tortor ut enim ultricies ultrices.
 
@@ -27,5 +27,5 @@
     Nunc bibendum dolor in fermentum pharetra.
     In ut arcu at lacus gravida consectetur.
     Pellentesque eu ligula lobortis, sagittis neque eleifend, dapibus ex.
-"
+'
 }
