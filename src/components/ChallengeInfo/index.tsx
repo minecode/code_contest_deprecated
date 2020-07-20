@@ -12,7 +12,7 @@ import {
 
 import base64 from 'base-64'
 import ReactMarkdown from 'react-markdown'
-
+import { titleCase } from '../Utils'
 export interface Props {
   challengeName?: string;
 }
@@ -31,7 +31,7 @@ const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
     <>
       <ContainerInfo>
         <Title>
-          {challengeName}
+          {titleCase(challengeName as string)}
         </Title>
         <Separator />
       </ContainerInfo>

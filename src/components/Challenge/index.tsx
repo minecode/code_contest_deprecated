@@ -7,6 +7,7 @@ import ChallengeButton from '../ChallengeButton'
 
 import { useFetch } from 'src/hooks/useFetch'
 import Drop from '../Drop'
+import { titleCase } from '../Utils'
 
 interface Challenge {
   name: string
@@ -23,7 +24,7 @@ const Challenge: React.FC = () => {
       if (challenge.isEqualNode(document.getElementById(id.toString()))) {
         data?.forEach(selectedChallenge => {
           const selectedChallengeName = selectedChallenge.name.split('_').join(' ')
-          if (selectedChallengeName === challenge.firstChild?.textContent) {
+          if (titleCase(selectedChallengeName) === challenge.firstChild?.textContent) {
             setChallengeName(selectedChallengeName)
             setChallengeSelected(id.toString())
           }

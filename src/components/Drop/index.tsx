@@ -70,7 +70,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           const result = (reader.result as string).split(',')[1]
 
           const bodyRequest: BodyRequest = {
-            message: `${challengeName}/user1`,
+            message: `${challengeName?.split(' ').join('_')}/user1`,
             committer: {
               name: 'minecodebot',
               email: 'minecode.geral@gmail.com'
@@ -94,7 +94,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
   const submitFile = async (bodyRequest: BodyRequest) => {
     setSolution('')
     setInProgress(true)
-    const push: Push = await apiCodeContest.put(`/contents/challenges/${challengeName}/user1/resolution.py`, bodyRequest, config)
+    const push: Push = await apiCodeContest.put(`/contents/challenges/${challengeName?.split(' ').join('_')}/user1/resolution.py`, bodyRequest, config)
     // eslint-disable-next-line no-var
     let run: Run = await apiCodeContest.get(`/commits/${push.data.commit.sha}/check-runs`, config)
     while (run.data.total_count === 0) {

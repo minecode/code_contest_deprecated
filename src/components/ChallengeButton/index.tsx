@@ -1,4 +1,5 @@
 import React from 'react'
+import { titleCase } from '../Utils'
 
 import { Container, HashtagIcon } from './styles'
 
@@ -12,7 +13,7 @@ const ChallengeButton: React.FC<Props> = ({ challengeName, selected }) => {
     <Container className={selected ? 'active' : ''}>
       <div>
         <HashtagIcon />
-        <span>{challengeName}</span>
+        <span>{titleCase(challengeName)}</span>
       </div>
     </Container>
   )
