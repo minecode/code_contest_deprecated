@@ -44,7 +44,7 @@ const Challenge: React.FC = () => {
               return challenge.name !== 'requirements.txt'
             }).map((challenge, i) => (
               <div key={i} id={i.toString()} onClick={() => handleSelectChange(i)}>
-                <ChallengeButton challengeName={challenge.name} selected={challengeSelected === i.toString()}/>
+                <ChallengeButton challengeName={challenge.name.split('_').join(' ')} selected={challengeSelected === i.toString()}/>
               </ div>
             ))}
           </div>

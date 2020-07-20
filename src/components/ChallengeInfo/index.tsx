@@ -7,7 +7,6 @@ import {
   ContainerDescription,
   Title,
   Separator,
-  Description,
   Info
 } from './styles'
 
@@ -24,28 +23,21 @@ interface Challenge {
 
 const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
   const { data } = useFetch<Challenge>(
-    `/contents/challenges/${challengeName}/index.json`
+    `/contents/challenges/${challengeName?.split(' ').join('_')}/index.yml`
   )
 
   return (
     <>
       <ContainerInfo>
         <Title>
-          {data && base64.decode(data.content).length > 1
-            ? JSON.parse(base64.decode(data.content)).title
-            : ''}
+          {challengeName}
         </Title>
         <Separator />
-        <Description>
-          {data && base64.decode(data.content).length > 1
-            ? JSON.parse(base64.decode(data.content)).difficulty
-            : ''}
-        </Description>
       </ContainerInfo>
       <ContainerDescription>
         <Info>
           {data && base64.decode(data.content).length > 1
-            ? JSON.parse(base64.decode(data.content)).description
+            ? base64.decode(data.content)
             : ''}
         </Info>
       </ContainerDescription>
