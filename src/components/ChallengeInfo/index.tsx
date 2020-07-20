@@ -11,6 +11,7 @@ import {
 } from './styles'
 
 import base64 from 'base-64'
+import ReactMarkdown from 'react-markdown'
 
 export interface Props {
   challengeName?: string;
@@ -23,7 +24,7 @@ interface Challenge {
 
 const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
   const { data } = useFetch<Challenge>(
-    `/contents/challenges/${challengeName?.split(' ').join('_')}/index.yml`
+    `/contents/challenges/${challengeName?.split(' ').join('_')}/index.md`
   )
 
   return (
@@ -37,7 +38,7 @@ const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
       <ContainerDescription>
         <Info>
           {data && base64.decode(data.content).length > 1
-            ? base64.decode(data.content)
+            ? <ReactMarkdown source={base64.decode(data.content)} />
             : ''}
         </Info>
       </ContainerDescription>
