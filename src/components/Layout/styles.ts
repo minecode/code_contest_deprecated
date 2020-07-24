@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 // CI - Challenge Info
 // CL - Challenge List
@@ -6,16 +6,20 @@ import styled from 'styled-components'
 // UI - User Info
 // UL - User List
 
+export const Auth = styled.div`
+	grid-area: LG;
+`;
+
 export const Grid = styled.div`
-  display: grid;
+	display: grid;
 
-  grid-template-columns: 311px auto 240px;
-  grid-template-rows: 46px auto 52px;
+	grid-template-columns: 311px auto 240px;
+	grid-template-rows: 46px auto 52px;
 
-  grid-template-areas:
-    'C C UL'
-    'C C UL'
-    'C C UL';
+	grid-template-areas:
+		'C C LG'
+		'C C UL'
+		'C C UL';
 
-  height: 100vh;
-`
+	height: 100vh;
+`;
