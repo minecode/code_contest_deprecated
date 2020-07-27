@@ -4,12 +4,12 @@ import { Grid } from './styles'
 
 import Challenge from '../Challenge'
 import UserList from '../UserList'
-import Authentication from '../Authentication'
+import Navbar from '../Navbar'
 
 const Layout: React.FC = () => {
   return (
     <Grid>
-      <Authentication />
+      <Navbar />
       <Challenge />
       <UserList />
     </Grid>
