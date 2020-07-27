@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 // CI - Challenge Info
 // CL - Challenge List
@@ -8,18 +8,19 @@ import styled from 'styled-components';
 
 export const Auth = styled.div`
 	grid-area: LG;
-`;
+
+	background-color: var(--primary);
+`
 
 export const Grid = styled.div`
 	display: grid;
 
-	grid-template-columns: 311px auto 240px;
-	grid-template-rows: 46px auto 52px;
+	grid-template-columns: auto 240px;
+	grid-template-rows: 46px auto;
 
 	grid-template-areas:
-		'C C LG'
-		'C C UL'
-		'C C UL';
+		'C LG'
+		'C UL';
 
 	height: 100vh;
-`;
+`
