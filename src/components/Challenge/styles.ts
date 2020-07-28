@@ -24,3 +24,9 @@ export const Grid = styled.div`
 
   height: 100vh;
 `
+
+export const LoginInfo = styled.div`
+  text-align: center;
+  padding: 20px;
+  color: var(--gray);
+`

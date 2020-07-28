@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Container, Grid } from './styles'
+import { Container, Grid, LoginInfo } from './styles'
+import { Col, Row } from 'react-bootstrap'
 
 import ChallengeInfo from '../ChallengeInfo'
 import ChallengeList from '../ChallengeList'
@@ -23,7 +24,11 @@ const Challenge: React.FC = () => {
             {authentication ? (
               <Drop />
             ) : (
-              <></>
+              <Row>
+                <Col xs={12} className="text-center">
+                  <LoginInfo>You need to log in to send your solution!</LoginInfo>
+                </Col>
+              </Row>
             )}
           </>
         ) : (

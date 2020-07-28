@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   grid-area: DF;
-  font-family: sans-serif;
 `
 
 export const SubmitButton = styled.button`
@@ -22,9 +21,6 @@ export const DropFiles = styled.div`
   text-align: center;
   padding: 20px;
   color: var(--gray);
-
-  /* margin-bottom: 20px; */
-
 `
 
 export const DropFilesZone = styled.div`
