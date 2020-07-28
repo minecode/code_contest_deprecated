@@ -1,9 +1,0 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Cras a tortor ut enim ultricies ultrices.
-Nulla ac nunc aliquet, euismod lorem eget, molestie turpis.
-Nunc vel velit nec erat mattis sodales ut et risus.
-Proin aliquam ante at felis mollis bibendum.
-
-Aliquam tempus neque et erat pharetra lacinia.
-Mauris rutrum massa at fringilla ultricies.

@@ -27,7 +27,7 @@ interface Challenge {
 const ChallengeInfo: React.FC = () => {
   const challengeName = useSelector((state: any) => state.data.challenge.name)
   const { data } = useFetch<Challenge>(
-    `/contents/contests/challenges/${challengeName?.split(' ').join('_')}/index.md`
+    `/contents/contests/${challengeName?.split(' ').join('_')}/index.md`
   )
 
   return (

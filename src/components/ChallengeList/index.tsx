@@ -12,14 +12,14 @@ interface Challenge {
     name: string;
 }
 
-const ChallengeList: React.FC = () => {
+const ContestList: React.FC = () => {
   const dispatch = useDispatch()
   const dataAuth = useSelector((state: any) => state.data.auth)
 
-  const { data } = useFetch<Challenge[]>('/contents/contests/challenges')
+  const { data } = useFetch<Challenge[]>('/contents/contests')
   const handleSelectChange = useCallback(
     (id: number) => {
-      const challenges = document.getElementById('listOfChallenges')?.childNodes
+      const challenges = document.getElementById('listOfContests')?.childNodes
         challenges?.forEach((challenge) => {
           if (
             challenge.isEqualNode(
@@ -52,20 +52,20 @@ const ChallengeList: React.FC = () => {
   return (
     <ContainerList>
       <Category>
-        <span>Challenges</span>
+        <span>Contests</span>
       </Category>
-      <div id='listOfChallenges'>
-        {data?.filter((challenge: any) => {
-          return challenge.name !== 'requirements.txt'
+      <div id='listOfContests'>
+        {data?.filter((contest: any) => {
+          return contest.name !== 'requirements.txt'
         })
-        .map((challenge, i) => (
+        .map((contest, i) => (
           <div
             key={i}
             id={i.toString()}
             onClick={() => handleSelectChange(i)}
           >
             <ChallengeButton
-              challengeName={challenge.name}
+              contestName={contest.name}
             />
           </div>
         ))}
@@ -74,4 +74,4 @@ const ChallengeList: React.FC = () => {
   )
 }
 
-export default ChallengeList
+export default ContestList

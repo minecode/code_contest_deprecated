@@ -5,16 +5,16 @@ import { Container, HashtagIcon } from './styles'
 import { useSelector } from 'react-redux'
 
 export interface Props {
-  challengeName: string
+  contestName: string
 }
 
-const ChallengeButton: React.FC<Props> = ({ challengeName }) => {
+const ChallengeButton: React.FC<Props> = ({ contestName }) => {
   const selectedChallengeName = useSelector((state: any) => state.data.challenge.name)
   return (
-    <Container className={selectedChallengeName && challengeName === selectedChallengeName.split(' ').join('_') ? 'active' : ''}>
+    <Container className={selectedChallengeName && contestName === selectedChallengeName.split(' ').join('_') ? 'active' : ''}>
       <div>
         <HashtagIcon />
-        {challengeName ? <span>{titleCase(challengeName)}</span> : <></>}
+        {contestName ? <span>{titleCase(contestName)}</span> : <></>}
       </div>
     </Container>
   )
