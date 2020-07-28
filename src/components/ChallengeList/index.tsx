@@ -16,7 +16,7 @@ const ChallengeList: React.FC = () => {
   const dispatch = useDispatch()
   const dataAuth = useSelector((state: any) => state.data.auth)
 
-  const { data } = useFetch<Challenge[]>('/contents/challenges')
+  const { data } = useFetch<Challenge[]>('/contents/contests/challenges')
   const handleSelectChange = useCallback(
     (id: number) => {
       const challenges = document.getElementById('listOfChallenges')?.childNodes

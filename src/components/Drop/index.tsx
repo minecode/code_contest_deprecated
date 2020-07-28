@@ -91,7 +91,7 @@ const Drop: React.FC = () => {
           }
 
           try {
-            const fileAlreadyExist = await apiCodeContest.get(`/contents/challenges/${challengeName?.split(' ').join('_')}/${auth.user.id}/resolution.py`, config)
+            const fileAlreadyExist = await apiCodeContest.get(`/contents/contests/challenges/${challengeName?.split(' ').join('_')}/${auth.user.id}/resolution.py`, config)
             bodyRequest.sha = `${fileAlreadyExist.data.sha}`
           } catch (error) {
             console.log(error)
@@ -106,7 +106,7 @@ const Drop: React.FC = () => {
   const submitFile = async (bodyRequest: BodyRequest) => {
     setSolution('')
     setInProgress(true)
-    await apiCodeContest.put(`/contents/challenges/${challengeName?.split(' ').join('_')}/${auth.user.id}/resolution.py`, bodyRequest, config)
+    await apiCodeContest.put(`/contents/contests/challenges/${challengeName?.split(' ').join('_')}/${auth.user.id}/resolution.py`, bodyRequest, config)
   }
 
   return (
