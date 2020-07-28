@@ -23,7 +23,7 @@ export const DropFiles = styled.div`
   padding: 20px;
   color: var(--gray);
 
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 
 `
 

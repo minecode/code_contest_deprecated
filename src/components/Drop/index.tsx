@@ -5,10 +5,8 @@ import Dropzone from 'react-dropzone'
 import apiCodeContest from '../../services/apiCodeContest'
 
 import { Modal, Spinner, Col, Row } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 
-export interface Props {
-  challengeName?: string;
-}
 interface BodyRequest {
   [key: string]: any
 }
@@ -42,7 +40,7 @@ interface Runs {
   total_count: number
 }
 
-const Drop: React.FC<Props> = ({ challengeName }) => {
+const Drop: React.FC = () => {
   const [fileName, setFileName] = useState('')
   const [solution, setSolution] = useState<string>('')
   const [inProgress, setInProgress] = useState(false)
@@ -50,6 +48,9 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
   const [show, setShow] = useState(false)
   const [currentChallengeName, setCurrentChallengeName] = useState<string>('challenge')
   const [bodyRequest, setBodyRequest] = useState <BodyRequest | null >(null)
+  const data = useSelector((state: any) => state.data)
+  const challengeName = data.challenge.name
+  const auth = data.auth
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -81,7 +82,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           const result = (reader.result as string).split(',')[1]
 
           const bodyRequest: BodyRequest = {
-            message: `${challengeName?.split(' ').join('_')}/user1`,
+            message: `${challengeName?.split(' ').join('_')}/${auth.user.id}`,
             committer: {
               name: 'minecodebot',
               email: 'minecode.geral@gmail.com'
@@ -90,7 +91,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
           }
 
           try {
-            const fileAlreadyExist = await apiCodeContest.get(`/contents/challenges/${challengeName?.split(' ').join('_')}/user1/resolution.py`, config)
+            const fileAlreadyExist = await apiCodeContest.get(`/contents/challenges/${challengeName?.split(' ').join('_')}/${auth.user.id}/resolution.py`, config)
             bodyRequest.sha = `${fileAlreadyExist.data.sha}`
           } catch (error) {
             console.log(error)
@@ -105,7 +106,7 @@ const Drop: React.FC<Props> = ({ challengeName }) => {
   const submitFile = async (bodyRequest: BodyRequest) => {
     setSolution('')
     setInProgress(true)
-    await apiCodeContest.put(`/contents/challenges/${challengeName?.split(' ').join('_')}/user1/resolution.py`, bodyRequest, config)
+    await apiCodeContest.put(`/contents/challenges/${challengeName?.split(' ').join('_')}/${auth.user.id}/resolution.py`, bodyRequest, config)
   }
 
   return (

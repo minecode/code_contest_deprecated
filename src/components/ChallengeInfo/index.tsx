@@ -13,6 +13,8 @@ import {
 import base64 from 'base-64'
 import ReactMarkdown from 'react-markdown'
 import { titleCase } from '../Utils'
+import { useSelector } from 'react-redux'
+
 export interface Props {
   challengeName?: string;
 }
@@ -22,7 +24,8 @@ interface Challenge {
   content: string;
 }
 
-const ChallengeInfo: React.FC<Props> = ({ challengeName }) => {
+const ChallengeInfo: React.FC = () => {
+  const challengeName = useSelector((state: any) => state.data.challenge.name)
   const { data } = useFetch<Challenge>(
     `/contents/challenges/${challengeName?.split(' ').join('_')}/index.md`
   )

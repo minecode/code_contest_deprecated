@@ -6,23 +6,29 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Auth } from './styles'
 
 const Authentication: React.FC = () => {
-  const authentication = useSelector((state: any) => state.data.authenticated)
+  const data = useSelector((state: any) => state.data)
+  const authentication = data.auth.authenticated
+  const dataChallenge = data.challenge
+
   const dispatch = useDispatch()
 
   const login = (response: any) => {
-    const newState = {
+    const newAuth = {
       data: {
-        authenticated: true,
-        user: {
-          id: response.googleId,
-          name: response.profileObj.givenName,
-          surname: response.profileObj.familyName,
-          image: response.profileObj.ImageUrl
+        auth: {
+          authenticated: true,
+          user: {
+            id: response.googleId,
+            name: response.profileObj.givenName,
+            surname: response.profileObj.familyName,
+            image: response.profileObj.ImageUrl
+          },
+          token: response.tokenId
         },
-        token: response.tokenId
+        challenge: dataChallenge
       }
     }
-    dispatch({ type: 'LOGIN', data: newState })
+    dispatch({ type: 'LOGIN', data: newAuth })
   }
 
   const badResponseGoogle = (response: any) => {
@@ -31,7 +37,22 @@ const Authentication: React.FC = () => {
   }
 
   const logout = () => {
-    dispatch({ type: 'LOGOUT', data: null })
+    const newAuth = {
+      data: {
+        auth: {
+          authenticated: false,
+          user: {
+            id: null,
+            name: null,
+            surname: null,
+            image: null
+          },
+          token: null
+        },
+        challenge: dataChallenge
+      }
+    }
+    dispatch({ type: 'LOGOUT', data: newAuth })
   }
 
   return (

@@ -25,6 +25,8 @@ export const Container = styled.div`
     ::-webkit-scrollbar-track {
       background-color: var(--secondary);
     }
+    max-height: calc(100vh - 46px)
+
   }
 
   display: none

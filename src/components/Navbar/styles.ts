@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   color: var(--white);
   background-color: var(--tertiary);
+  padding: 20px;
 `
 
 export const UserInfo = styled.div`
@@ -22,4 +23,5 @@ export const Avatar = styled.div`
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--gray);
+  margin: 0 0 0 20px;
 `

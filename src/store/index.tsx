@@ -2,14 +2,19 @@ import { createStore } from 'redux'
 
 const INITIAL_STATE = {
   data: {
-    authenticated: false,
-    user: {
-      id: null,
-      name: null,
-      surname: null,
-      image: null
+    auth: {
+      authenticated: false,
+      user: {
+        id: null,
+        name: null,
+        surname: null,
+        image: null
+      },
+      token: null
     },
-    token: null
+    challenge: {
+      name: null
+    }
   }
 }
 
@@ -18,7 +23,9 @@ function authenticated (state: any, action: any) {
     case 'LOGIN':
       return action.data
     case 'LOGOUT':
-      return INITIAL_STATE
+      return action.data
+    case 'CHALLENGE':
+      return action.data
     default:
       return INITIAL_STATE
   }

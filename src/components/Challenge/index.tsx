@@ -1,88 +1,27 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 
-import { Container, Grid, ContainerList, Category } from './styles'
+import { Container, Grid } from './styles'
 
 import ChallengeInfo from '../ChallengeInfo'
-import ChallengeButton from '../ChallengeButton'
+import ChallengeList from '../ChallengeList'
 
-import { useFetch } from 'src/hooks/useFetch'
 import Drop from '../Drop'
-import { titleCase } from '../Utils'
 import { useSelector } from 'react-redux'
 
-interface Challenge {
-	name: string;
-}
-
 const Challenge: React.FC = () => {
-  const [challengeName, setChallengeName] = useState('')
-  const [challengeSelected, setChallengeSelected] = useState('')
-  const authentication = useSelector((state: any) => state.data.authenticated)
-
-  const { data } = useFetch<Challenge[]>('/contents/challenges')
-  const handleSelectChange = useCallback(
-    (id: number) => {
-      const challenges = document.getElementById('listOfChallenges')
-				?.childNodes
-			challenges?.forEach((challenge) => {
-			  if (
-			    challenge.isEqualNode(
-			      document.getElementById(id.toString())
-			    )
-			  ) {
-					data?.forEach((selectedChallenge) => {
-					  const selectedChallengeName = selectedChallenge.name
-					    .split('_')
-					    .join(' ')
-					  if (
-					    titleCase(selectedChallengeName) ===
-							challenge.firstChild?.textContent
-					  ) {
-					    setChallengeName(selectedChallengeName)
-					    setChallengeSelected(id.toString())
-					  }
-					})
-			  }
-			})
-    },
-    [data]
-  )
+  const data = useSelector((state: any) => state.data)
+  const authentication = data.auth.authenticated
+  const challengeName = data.challenge.name
 
   return (
     <Container>
       <Grid>
-        <ContainerList>
-          <Category>
-            <span>Challenges</span>
-          </Category>
-          <div id='listOfChallenges'>
-            {data
-							?.filter((challenge: any) => {
-							  return challenge.name !== 'requirements.txt'
-							})
-							.map((challenge, i) => (
-							  <div
-							    key={i}
-							    id={i.toString()}
-							    onClick={() => handleSelectChange(i)}
-							  >
-							    <ChallengeButton
-							      challengeName={challenge.name
-							        .split('_')
-							        .join(' ')}
-							      selected={
-							        challengeSelected === i.toString()
-							      }
-							    />
-							  </div>
-							))}
-          </div>
-        </ContainerList>
+        <ChallengeList />
         {challengeName ? (
           <>
-            <ChallengeInfo challengeName={challengeName} />
+            <ChallengeInfo />
             {authentication ? (
-              <Drop challengeName={challengeName} />
+              <Drop />
             ) : (
               <></>
             )}
