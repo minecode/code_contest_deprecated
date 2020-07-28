@@ -33,5 +33,5 @@ export const LoginInfo = styled.div`
 
 export const Message = styled.div`
   margin-right: 15px;
-  margin-left: 15px
+  margin-left: 15px;
 `
