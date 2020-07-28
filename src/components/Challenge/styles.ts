@@ -30,3 +30,8 @@ export const LoginInfo = styled.div`
   padding: 20px;
   color: var(--gray);
 `
+
+export const Message = styled.div`
+  margin-right: 15px;
+  margin-left: 15px
+`
