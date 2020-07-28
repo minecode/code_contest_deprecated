@@ -4,7 +4,7 @@ import { Container, Grid, LoginInfo, Message } from './styles'
 import { Col, Row } from 'react-bootstrap'
 
 import ChallengeInfo from '../ChallengeInfo'
-import ChallengeList from '../ChallengeList'
+import ContestList from '../ContestList'
 
 import Drop from '../Drop'
 import { useSelector } from 'react-redux'
@@ -17,7 +17,7 @@ const Challenge: React.FC = () => {
   return (
     <Container>
       <Grid>
-        <ChallengeList />
+        <ContestList />
         {challengeName ? (
           <>
             <ChallengeInfo />

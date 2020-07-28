@@ -34,7 +34,7 @@ const ChallengeInfo: React.FC = () => {
     <>
       <ContainerInfo>
         <Title>
-          {titleCase(challengeName as string)}
+          {titleCase(challengeName.split('/')[1] as string)}
         </Title>
         <Separator />
       </ContainerInfo>

@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { Hashtag } from 'styled-icons/heroicons-outline'
+import { EmojiFoodBeverage } from 'styled-icons/material-outlined'
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  cursor: pointer;
 
   padding: 5px 3px;
   border-radius: 5px;
@@ -15,7 +14,6 @@ export const Container = styled.div`
 
   transition: background-color 0.2s;
 
-  padding: 0 20px;
 
   > div {
     display: flex;
@@ -23,7 +21,6 @@ export const Container = styled.div`
   }
 
   > div span {
-    margin-left: 5px;
     color: var(--senary);
 
     white-space: nowrap;
@@ -41,9 +38,10 @@ export const Container = styled.div`
   }
 `
 
-export const HashtagIcon = styled(Hashtag)`
+export const HashtagIcon = styled(EmojiFoodBeverage)`
   width: 20px;
   height: 20px;
 
   color: var(--symbol);
+  margin: 0 5px;
 `
