@@ -38,7 +38,7 @@ export const Container = styled.div`
   }
 `
 
-export const HashtagIcon = styled(EmojiFoodBeverage)`
+export const ContestIcon = styled(EmojiFoodBeverage)`
   width: 20px;
   height: 20px;
 

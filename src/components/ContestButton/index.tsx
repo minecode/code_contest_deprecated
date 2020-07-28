@@ -1,7 +1,7 @@
 import React from 'react'
 import { titleCase } from '../Utils'
 
-import { Container, HashtagIcon } from './styles'
+import { Container, ContestIcon } from './styles'
 import { useSelector } from 'react-redux'
 
 export interface Props {
@@ -10,11 +10,17 @@ export interface Props {
 
 const ContestButton: React.FC<Props> = ({ contestName }) => {
   const selectedChallengeName = useSelector((state: any) => state.data.challenge.name)
+  // if (selectedChallengeName) {
+  //   console.log('===================')
+  //   console.log(contestName.split('/')[0])
+  //   console.log(selectedChallengeName.split('/')[0].split(' ').join('_'))
+  //   console.log('===================')
+  // }
   return (
-    <Container className={selectedChallengeName && contestName === titleCase(selectedChallengeName.split('/')[0].split('_').join(' ')) ? 'active' : ''}>
+    <Container className={selectedChallengeName && contestName.split('/')[0] === selectedChallengeName.split('/')[0].split(' ').join('_') ? 'active' : ''}>
       <div>
-        <HashtagIcon />
-        {contestName ? <span>{titleCase(contestName)}</span> : <></>}
+        <ContestIcon />
+        {contestName ? <span>{titleCase(contestName.split('/')[0])}</span> : <></>}
       </div>
     </Container>
   )

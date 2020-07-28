@@ -11,6 +11,8 @@ export function useFetch<Data = any, Error = any> (url: string) {
     }
     const response = await apiCodeContest.get(url, config)
     return response.data
+  }, {
+    revalidateOnFocus: true
   })
 
   return { data, error, mutate }

@@ -11,10 +11,10 @@ export interface Props {
 const ChallengeButton: React.FC<Props> = ({ challengeName }) => {
   const selectedChallengeName = useSelector((state: any) => state.data.challenge.name)
   return (
-    <Container className={selectedChallengeName && challengeName === selectedChallengeName.split('/')[1].split(' ').join('_') ? 'active' : ''}>
+    <Container className={selectedChallengeName && challengeName.split('/')[0] === selectedChallengeName.split('/')[0].split(' ').join('_') && challengeName.split('/')[1] === selectedChallengeName.split('/')[1].split(' ').join('_') ? 'active' : ''}>
       <div>
         <HashtagIcon />
-        {challengeName ? <span>{titleCase(challengeName)}</span> : <></>}
+        {challengeName ? <span>{titleCase(challengeName.split('/')[1])}</span> : <></>}
       </div>
     </Container>
   )
