@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { ContainerList, Category } from './styles'
 
@@ -18,6 +18,7 @@ interface Challenge {
 const ContestList: React.FC = () => {
   const dispatch = useDispatch()
   const dataAuth = useSelector((state: any) => state.data.auth)
+  const [contestsActive, setContestsActive] = useState<string []>([])
 
   const { data } = useFetch<Contest>('/git/trees/bed6cd92797d728d25ec5b2ecca010f03196cbdb?recursive="true"')
   const handleSelectChange = useCallback(
@@ -33,6 +34,12 @@ const ContestList: React.FC = () => {
     [dataAuth, dispatch]
   )
 
+  const handleVisibleContest = (contest: any) => {
+    contestsActive.includes(contest)
+      ? setContestsActive(contestsActive.filter(item => item !== contest))
+      : setContestsActive(contestsActive => [...contestsActive, contest])
+  }
+
   return (
     <ContainerList>
       <Category>
@@ -43,10 +50,15 @@ const ContestList: React.FC = () => {
           return (contest.path.split('/').length === 1 || (contest.path.split('/').length === 2 && contest.path.split('/')[1] !== 'requirements.txt'))
         }).map((contest, i) => (
           <>
-            {contest.path.split('/').length === 1 ? <ContestButton key={i} contestName={contest.path}></ContestButton>
-              : contest.path.split('/').length === 2 ? <div
+            {contest.path.split('/').length === 1 ? <div
+              key={i}
+              id={i.toString()}
+              onClick={() => handleVisibleContest(contest.path.split('/')[0])}
+            ><ContestButton contestName={contest.path}></ContestButton></div>
+              : contest.path.split('/').length === 2 && contestsActive.includes(contest.path.split('/')[0]) ? <div
                 key={i}
                 id={i.toString()}
+                className={contest.path.split('/')[0]}
                 onClick={() => handleSelectChange(contest.path)}
               >
                 <ChallengeButton

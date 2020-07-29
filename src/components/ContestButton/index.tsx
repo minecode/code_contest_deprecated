@@ -10,12 +10,6 @@ export interface Props {
 
 const ContestButton: React.FC<Props> = ({ contestName }) => {
   const selectedChallengeName = useSelector((state: any) => state.data.challenge.name)
-  // if (selectedChallengeName) {
-  //   console.log('===================')
-  //   console.log(contestName.split('/')[0])
-  //   console.log(selectedChallengeName.split('/')[0].split(' ').join('_'))
-  //   console.log('===================')
-  // }
   return (
     <Container className={selectedChallengeName && contestName.split('/')[0] === selectedChallengeName.split('/')[0].split(' ').join('_') ? 'active' : ''}>
       <div>
