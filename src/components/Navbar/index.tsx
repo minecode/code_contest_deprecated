@@ -5,21 +5,25 @@ import Authentication from '../Authentication'
 import {
   Container,
   Avatar,
-  UserInfo
+  UserInfo,
+  Auth
 } from './styles'
 
 const Navbar: React.FC = () => {
   const authentication = useSelector((state: any) => state.data.auth)
-
   return (
     <Container>
-      <Authentication />
       {authentication.authenticated
         ? <UserInfo>
           <span>Welcome, {authentication.user.name}!</span>
-          <Avatar/>
+          <Avatar
+            src={authentication.user.image}
+          />
         </UserInfo> : <></>
       }
+      <Auth>
+        <Authentication />
+      </Auth>
     </Container>
   )
 }
