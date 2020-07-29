@@ -43,3 +43,9 @@ jobs:
       - name: Test with pytest
         working-directory: ./contests/${{env.commitmsg}}
         run: pytest -vv
+
+      - name: Update database
+        uses: satak/webrequest-action@master
+        with:
+          url: http://localhost:4001/contests/post/${{env.commitmsg}}/100
+          method: POST
