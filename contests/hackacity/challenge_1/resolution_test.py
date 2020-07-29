@@ -9,7 +9,7 @@ def test_add_zero():
     assert add_numbers(1, 0) == 1
 
 def test_add_negative():
-    assert add_numbers(4, -100) == -96
+    assert add_numbers(4, -100) == -94
 
 def test_add_string__expect_exception():
     with pytest.raises(TypeError):
