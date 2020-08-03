@@ -2,66 +2,63 @@ Create a minecode website with some challenges where someone can participate and
 Add possibility to make contestes and teams.
 Login with google.
 
-Frameworks/Languages:
+**Stack**:
 
-  ReactJS
-  TypeScript
+  - ReactJS
+  - TypeScript
 
-Dependencies:
+**Font**:
 
-  axios
-  SWR
-  styled-components
-  @types/styled-components (devDependecies)
+  - -apple-sysyem, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, Arial, sans-serife;
 
-Font:
+**Pages**:
 
-  -apple-sysyem, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, Arial, sans-serife;
+  - **Home**:
+    - List of contests/challenges
+    - List of online users
+    - Challenge info (if selected)
+      - Description
+      - Submit space
+      - My resolutions and scores (if applicable)
+  - **Profile**:
+    - ...
 
-Pages:
+**Database (sqlite3)**:
 
-  Home:
-    List of contests/challenges
-    List of online users
-    Challenge info (if selected)
-      Description
-      Submit space
-      My resolutions and scores (if applicable)
-
-Database (sqlite3):
-
-Difficulty:
-
+  - **Difficulty**:
+  ```
   ID (int, required, unique)
   Title (string, required)
   Value (double [0... 1], required)
-
-UserChallengeClassification
-
+  ```
+  
+  - **UserChallengeClassification**
+  ```
   ID (int, required, unique)
   User.ID (int, required)
   Contest.ID (int, required)
   Challenge.ID (int, required)
   Score (double, required)
-    
-Workflows:
+  ```
+  
+**Workflows**:
 
-  Require login:
-    *Submit/Update a new response*:
+  - **Require login**:
+    - **Submit/Update a new response**:
     Login w/ Google -> Select challenge -> Submit response -> Push the response -> Dispute a new CI/CD Github actions when push (Run testes and calculate score) -> If testes are passed then store [UserID, ContestID, ChallengeID, Score]
-    *View history*:
+    - **View history**:
     Login w/ Google -> Select challenge -> View submitted resolutions
-    *View profile*:
+    - **View profile**:
     Login w/ Google -> Click on 'My profile'
-  No require login:
-    *View general classification*:
+  - **No require login**:
+    - **View general classification**:
     View classification of all members in all challenges
-    *View contest classification*:
+    - **View contest classification**:
     Select challenge -> View classification of all members in selected contest
-    *View challenge classification*:
+    - **View challenge classification**:
     Select challenge -> View classification of all members in selected challenge
-    *View contest*:
+    - **View contest**:
     Select contest
-    *View challenge*:
+    - **View challenge**:
     Select challenge
     
