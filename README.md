@@ -32,7 +32,7 @@ Login with google.
   Value (double [0... 1], required)
   ```
   
-  - **UserChallengeClassification**
+  - **ScoreUserChallenge**
   ```
   ID (int, required, unique)
   User.ID (int, required)

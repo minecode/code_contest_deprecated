@@ -1,49 +1,46 @@
-import React from 'react';
+import React from 'react'
+import { useFetch } from 'src/hooks/useFetch'
+import { useSelector } from 'react-redux'
 
-import { Container, Role, User, Avatar } from './styles';
+import { Container, Role, User, Avatar } from './styles'
 
-interface UserProps {
-	nickname: string;
-	isBot?: boolean;
+interface User {
+	userId: string;
+	score: number;
+  }
+
+const UserRow: React.FC<User> = ({ userId, score }) => {
+  return (
+    <User>
+      <Avatar/>
+
+      <strong>{userId}</strong>
+	  <span>{score}</span>
+
+    </User>
+  )
 }
 
-const UserRow: React.FC<UserProps> = ({ nickname, isBot }) => {
-	return (
-		<User>
-			<Avatar className={isBot ? 'bot' : ''} />
-
-			<strong>{nickname}</strong>
-
-			{isBot && <span>Bot</span>}
-		</User>
-	);
-};
-
 const UserList: React.FC = () => {
-	return (
-		<Container>
-			<Role>Disponível - 1</Role>
-			<UserRow nickname='Guilherme Rodz' />
-			<UserRow nickname='Diego Fernandes' isBot />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-			<UserRow nickname='Fulano' />
-		</Container>
-	);
-};
+  const contestChallenge = useSelector((state: any) => state.data)
+  const challengeName = contestChallenge.challenge.name
 
-export default UserList;
+  const { data: initialData } = useFetch<User[]>('http://localhost:4001/contests/global')
+  const { data } = useFetch<User[]>(`http://localhost:4001/contests/global/${challengeName}`)
+
+  return (
+    <Container>
+      { challengeName ? <Role>{challengeName.split('/').join(' ').split('_').join(' ')}</Role> : <Role>Global</Role> }
+      { data && data.length > 0 ? data.map(function (element, i) {
+        return <UserRow key={i} userId={element.userId} score={element.score}/>
+      })
+        : initialData ? initialData.map(function (element, i) {
+          return <UserRow key={i} userId={element.userId} score={element.score}/>
+        })
+          : <></>
+      }
+    </Container>
+  )
+}
+
+export default UserList

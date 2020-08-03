@@ -26,7 +26,7 @@ knex.schema
       // and use "id" as a primary identification
       // and increment "id" with every new record (book)
       return knex.schema.createTable('ScoreUserChallenge', (table) => {
-        table.increments('id').primary()
+        table.string('id').primary().unique()
         table.string('userId')
         table.string('contestId')
         table.string('challengeId')

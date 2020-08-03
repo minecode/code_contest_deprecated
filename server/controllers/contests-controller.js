@@ -1,61 +1,82 @@
 // Import database
 const knex = require('../db')
 
-// Retrieve all books
-exports.getAllScoresUserChallenge = async (req, res) => {
-  // Get all books from database
+exports.getScore = async (req, res) => {
   knex
-    .select('*') // select all records
-    .from('ScoreUserChallenge') // from 'books' table
+    .select('userId', knex.raw('SUM(score) as score'))
+    .from('ScoreUserChallenge')
+    .groupBy('userId')
     .then(userData => {
-      // Send books extracted from database in response
       res.json(userData)
     })
     .catch(err => {
-      // Send a error message in response
       res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
     })
 }
 
-// Remove specific book
-exports.deleteScoreUserChallenge = async (req, res) => {
-  // Find specific book in the database and remove it
-  knex('ScoreUserChallenge')
-    .where('userId', req.params.userId)
+exports.getScoreByContest = async (req, res) => {
+  knex
+    .select('userId', knex.raw('SUM(score) as score'))
+    .from('ScoreUserChallenge')
+    .groupBy('userId')
+    .where('contestId', req.params.contestId)
+    .then(userData => {
+      res.json(userData)
+    })
+    .catch(err => {
+      res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
+    })
+}
+
+exports.getScoreByContestChallenge = async (req, res) => {
+  knex
+    .select('userId', knex.raw('SUM(score) as score'))
+    .from('ScoreUserChallenge')
+    .groupBy('userId')
     .where('contestId', req.params.contestId)
     .where('challengeId', req.params.challengeId)
-    .del() // delete the record
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: `Book ${req.body.id} deleted.` })
+    .then(userData => {
+      res.json(userData)
     })
     .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
+      res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
     })
 }
 
-// Remove all books on the list
-exports.resetAllScoresUserChallenge = async (req, res) => {
-  // Remove all books from database
+exports.getScoreByUser = async (req, res) => {
   knex
-    .select('*') // select all records
+    .select(knex.raw('SUM(score)  as score'))
     .from('ScoreUserChallenge')
-    .truncate() // remove the selection
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: 'ScoreUserChallenge list cleared.' })
+    .groupBy('userId')
+    .where('userId', req.params.userId)
+    .then(userData => {
+      res.json(userData)
     })
     .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error resetting ScoreUserChallenge list: ${err}.` })
+      res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
     })
 }
 
-exports.getScoreUserChallenge = async (req, res) => {
+exports.getScoreByContestUser = async (req, res) => {
   knex
-    .select('score')
+    .select(knex.raw('SUM(score)  as score'))
     .from('ScoreUserChallenge')
+    .groupBy('userId')
+    .where('userId', req.params.userId)
+    .where('contestId', req.params.contestId)
+    .then(userData => {
+      res.json(userData)
+    })
+    .catch(err => {
+      res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
+    })
+}
+
+exports.getScoreByContestChallengeUser = async (req, res) => {
+  knex
+    .select(knex.raw('SUM(score)  as score'))
+    .from('ScoreUserChallenge')
+    .groupBy('userId')
     .where('userId', req.params.userId)
     .where('contestId', req.params.contestId)
     .where('challengeId', req.params.challengeId)
@@ -70,6 +91,7 @@ exports.getScoreUserChallenge = async (req, res) => {
 exports.createScoreUserChallenge = async (req, res) => {
   knex('ScoreUserChallenge')
     .insert({
+      id: req.params.userId + req.params.contestId + req.params.challengeId,
       userId: req.params.userId,
       contestId: req.params.contestId,
       challengeId: req.params.challengeId,
@@ -78,7 +100,15 @@ exports.createScoreUserChallenge = async (req, res) => {
     .then(userData => {
       res.json(userData)
     })
-    .catch(err => {
-      res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
+    .catch(() => {
+      knex('ScoreUserChallenge')
+        .where('id', req.params.userId + req.params.contestId + req.params.challengeId)
+        .update({ score: req.params.score })
+        .then(userData => {
+          res.json(userData)
+        })
+        .catch(err => {
+          res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
+        })
     })
 }

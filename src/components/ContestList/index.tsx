@@ -35,9 +35,25 @@ const ContestList: React.FC = () => {
   )
 
   const handleVisibleContest = (contest: any) => {
-    contestsActive.includes(contest)
-      ? setContestsActive(contestsActive.filter(item => item !== contest))
-      : setContestsActive(contestsActive => [...contestsActive, contest])
+    if (contestsActive.includes(contest)) {
+      setContestsActive(contestsActive.filter(item => item !== contest))
+      const newChallenge = {
+        data: {
+          auth: dataAuth,
+          challenge: { name: '' }
+        }
+      }
+      dispatch({ type: 'CHALLENGE', data: newChallenge })
+    } else {
+      setContestsActive(contestsActive => [...contestsActive, contest])
+      const newChallenge = {
+        data: {
+          auth: dataAuth,
+          challenge: { name: `${contest}/` }
+        }
+      }
+      dispatch({ type: 'CHALLENGE', data: newChallenge })
+    }
   }
 
   return (
