@@ -41,6 +41,14 @@ Login with google.
   Score (double, required)
   ```
   
+  - **User**
+  ```
+  ID (int, required, unique)
+  FirstName (string, required)
+  LastName (string, required)
+  ImageUrl (string, required)
+  ```
+  
 **Workflows**:
 
   - **Require login**:
