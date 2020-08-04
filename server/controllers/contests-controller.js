@@ -88,7 +88,7 @@ exports.getScoreByContestChallengeUser = async (req, res) => {
     })
 }
 
-exports.createScoreUserChallenge = async (req, res) => {
+exports.scoreUserChallenge = async (req, res) => {
   knex('ScoreUserChallenge')
     .insert({
       id: req.params.userId + req.params.contestId + req.params.challengeId,
@@ -109,6 +109,60 @@ exports.createScoreUserChallenge = async (req, res) => {
         })
         .catch(err => {
           res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
+        })
+    })
+}
+
+exports.getAllUser = async (req, res) => {
+  knex
+    .select('*')
+    .from('User')
+    .then(userData => {
+      res.json(userData)
+    })
+    .catch(err => {
+      res.json({ message: `There was an error retrieving User: ${err}` })
+    })
+}
+
+exports.getUser = async (req, res) => {
+  knex
+    .select('*')
+    .from('User')
+    .where('userId', req.params.userId)
+    .then(userData => {
+      res.json(userData)
+    })
+    .catch(err => {
+      res.json({ message: `There was an error retrieving User: ${err}` })
+    })
+}
+
+exports.user = async (req, res) => {
+  knex('User')
+    .insert({
+      userId: req.params.userId,
+      firstName: req.params.firstName,
+      lastName: req.params.lastName,
+      imageUrl: req.params.imageUrl
+    })
+    .then(userData => {
+      res.json(userData)
+    })
+    .catch(() => {
+      knex('User')
+        .where('userId', req.params.userId)
+        .update({
+          firstName: req.params.firstName,
+          lastName: req.params.lastName,
+          imageUrl: req.params.imageUrl,
+          updatedAt: knex.fn.now()
+        })
+        .then(userData => {
+          res.json(userData)
+        })
+        .catch(err => {
+          res.json({ message: `There was an error retrieving User: ${err}` })
         })
     })
 }

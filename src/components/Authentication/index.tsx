@@ -2,6 +2,8 @@ import React from 'react'
 
 import { GoogleLogin, GoogleLogout } from 'react-google-login'
 import { useDispatch, useSelector } from 'react-redux'
+import base64 from 'base-64'
+import apiDatabase from '../../services/apiDatabase'
 
 import { Auth, BtnGoogle } from './styles'
 
@@ -12,7 +14,7 @@ const Authentication: React.FC = () => {
 
   const dispatch = useDispatch()
 
-  const login = (response: any) => {
+  const login = async (response: any) => {
     const newAuth = {
       data: {
         auth: {
@@ -28,6 +30,8 @@ const Authentication: React.FC = () => {
         challenge: dataChallenge
       }
     }
+    await apiDatabase.post(`/user/${response.googleId}/${response.profileObj.givenName}/${response.profileObj.familyName}/${base64.encode(response.profileObj.imageUrl)}`)
+
     dispatch({ type: 'LOGIN', data: newAuth })
   }
 

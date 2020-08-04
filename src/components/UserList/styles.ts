@@ -83,16 +83,11 @@ export const User = styled.div`
   }
 `
 
-export const Avatar = styled.div`
-  flex-shrink: 0;
-
-  width: 32px;
+export const Avatar = styled.img`
+  width: 32;
   height: 32px;
-
+  flex-shrink: 0;
   border-radius: 50%;
-  background-color: var(--primary);
-
-  &.bot {
-    background-color: var(--mention-detail);
-  }
+  background: var(--gray);
+  margin: 0 0 0 20px;
 `
