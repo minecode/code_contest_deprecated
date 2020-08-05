@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Hashtag } from 'styled-icons/heroicons-outline'
+import { Check } from 'styled-icons/material'
 
 export const Container = styled.div`
   display: flex;
@@ -15,10 +16,11 @@ export const Container = styled.div`
 
   transition: background-color 0.2s;
 
-  padding: 0 20px;
+  padding: 0 0 0 20px;
 
   > div {
-    display: flex;
+    display: flex;  
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -46,4 +48,10 @@ export const HashtagIcon = styled(Hashtag)`
   height: 20px;
 
   color: var(--symbol);
+`
+
+export const CheckIcon = styled(Check)`
+  width: 21px;
+  height: 21px;
+  color: var(--green);
 `
