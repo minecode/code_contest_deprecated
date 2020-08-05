@@ -59,7 +59,7 @@ exports.getScoreByUser = async (req, res) => {
 
 exports.getScoreByContestUser = async (req, res) => {
   knex
-    .select(knex.raw('SUM(score)  as score'))
+    .select(knex.raw('SUM(score)  as score, COUNT(score) as number'))
     .from('ScoreUserChallenge')
     .groupBy('userId')
     .where('userId', req.params.userId)

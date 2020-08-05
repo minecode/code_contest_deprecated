@@ -75,7 +75,6 @@ const ContestList: React.FC = () => {
                     {contest.path.split('/').length === 1 ? (
                       <div key={i} id={i.toString()} onClick={() => handleVisibleContest(contest.path.split('/')[0])}>
                         <ContestButton contestName={contest.path} size={data.tree.filter((elem) => {
-                          console.log('elem', data.tree)
                           return elem.path.includes(contest.path) && elem.path.split('/').length === 3
                         }).length / 2}></ContestButton>
                       </div>

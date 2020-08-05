@@ -12,13 +12,13 @@ export interface Props {
 
 interface UserScore {
   score: number
+  number: number
 }
 
 const ContestButton: React.FC<Props> = ({ contestName, size }) => {
   const selectedChallengeName = useSelector((state: any) => state.data.challenge.name)
   const dataAuth = useSelector((state: any) => state.data.auth)
   const { data: userScore } = useFetch<UserScore[]>(`http://localhost:4001/contests/${dataAuth.user.id}/${contestName}`)
-
   return (
     <Container className={selectedChallengeName && contestName.split('/')[0] === selectedChallengeName.split('/')[0].split(' ').join('_') ? 'active' : ''}>
       <div style={{ width: '100%' }}>
@@ -26,7 +26,7 @@ const ContestButton: React.FC<Props> = ({ contestName, size }) => {
           <ContestIcon />
           {contestName ? <span>{titleCase(contestName.split('/')[0])}</span> : <></>}
         </div>
-        {userScore && userScore.length > 0 ? <span>{userScore.length}/{size}</span> : <span>0/{size}</span> }
+        {userScore ? <span>{userScore[0]?.number}/{size}</span> : <span>0/{size}</span> }
       </div>
     </Container>
   )
