@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Grid = styled.div`
 	display: grid;
 
-	grid-template-columns: auto 240px;
+	grid-template-columns: auto 311px;
 	grid-template-rows: 46px auto;
 
 	grid-template-areas:
@@ -17,4 +17,4 @@ export const Grid = styled.div`
 	}
 
 	height: 100vh;
-`
+`;
