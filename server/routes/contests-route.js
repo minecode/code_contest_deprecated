@@ -7,7 +7,6 @@ const contestsRoutes = require('../controllers/contests-controller.js')
 // Create router
 const router = express.Router()
 router.use(function timeLog (req, res, next) {
-  console.log('Time: ', Date.now())
   next()
 })
 router.get('/user', contestsRoutes.getAllUser)
