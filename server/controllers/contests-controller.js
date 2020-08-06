@@ -57,6 +57,19 @@ exports.getScoreByUser = async (req, res) => {
     })
 }
 
+exports.getListByUser = async (req, res) => {
+  knex
+    .select(knex.raw('*'))
+    .from('ScoreUserChallenge')
+    .where('userId', req.params.userId)
+    .then(userData => {
+      res.json(userData)
+    })
+    .catch(err => {
+      res.json({ message: `There was an error retrieving ScoreUserChallenge: ${err}` })
+    })
+}
+
 exports.getScoreByContestUser = async (req, res) => {
   knex
     .select(knex.raw('SUM(score)  as score, COUNT(score) as number'))

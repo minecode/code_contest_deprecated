@@ -7,13 +7,13 @@ import UserList from '../UserList'
 import Navbar from '../Navbar'
 
 const Layout: React.FC = () => {
-  return (
-    <Grid>
-      <Navbar />
-      <Challenge />
-      <UserList />
-    </Grid>
-  )
+    return (
+        <Grid>
+            <Navbar />
+            <Challenge />
+            <UserList />
+        </Grid>
+    )
 }
 
 export default Layout

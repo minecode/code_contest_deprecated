@@ -7,13 +7,13 @@ import Layout from './components/Layout'
 import GlobalStyles from './styles/GlobalStyles'
 
 function App () {
-  return (
-    <Provider store={store}>
-      <Layout />
+    return (
+        <Provider store={store}>
+            <Layout />
 
-      <GlobalStyles />
-    </Provider>
-  )
+            <GlobalStyles />
+        </Provider>
+    )
 }
 
 export default App

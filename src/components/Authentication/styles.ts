@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const Auth = styled.div`
-	grid-area: LG;
+    grid-area: LG;
 
-	background-color: var(--tertiary);
+    background-color: var(--tertiary);
 `
 export const BtnGoogle = styled.button`
     margin:5px;
@@ -15,7 +15,7 @@ export const BtnGoogle = styled.button`
     border:0px transparent;
     text-align: center;
 
-	&:hover {
-		background: var(--discord)
-	}
+    &:hover {
+        background: var(--discord)
+    }
 `
